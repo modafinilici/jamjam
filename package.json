@@ -1,0 +1,38 @@
+{
+  "name": "jamjam",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "dependencies": {
+    "@gridsome/plugin-google-analytics": "^0.1.0",
+    "@gridsome/plugin-sitemap": "^0.2.3",
+    "@gridsome/remark-prismjs": "0.0.6",
+    "@gridsome/source-filesystem": "^0.6.0",
+    "@gridsome/transformer-remark": "^0.3.4",
+    "graphql-playground-html": "^1.6.22",
+    "gridsome": "^0.7.0",
+    "gridsome-plugin-algolia": "^2.1.1",
+    "gridsome-plugin-gitalk": "^0.1.0",
+    "gridsome-plugin-robots": "^0.2.1",
+    "kind-of": "^6.0.3",
+    "klaro-gridsome": "^1.0.3",
+    "minimist": "^1.2.5",
+    "serialize-javascript": "^2.1.2",
+    "typeface-source-sans-pro": "^0.0.54",
+    "vue-feather-icons": "^4.22.0",
+    "vuex": "^3.1.1",
+    "websocket-extensions": "^0.1.4"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-resources-loader": "^1.2.1"
+  },
+  "resolutions": {
+    "minimist": "1.2.5"
+  }
+}
