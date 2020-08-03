@@ -17,7 +17,7 @@ function addStyleResource (rule) {
 
 module.exports = {
   siteName: 'Jamdocs',
-  siteUrl: process.env.SITE_URL || 'http://localhost:8080',
+  siteUrl: process.env.SITE_URL || 'https://modafinilici.com/',
   plugins: ['gridsome-plugin-robots'],
   templates: {
     Doc: '/:slug',
