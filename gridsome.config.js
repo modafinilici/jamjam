@@ -54,19 +54,13 @@ module.exports = {
       },
     },
 	{
-	  use: 'gridsome-plugin-robots-txt',
-	  options: {
-		host: 'https://modafinilici.com',
-		sitemap: 'https://modafinilici.com/sitemap.xml',
-		policy: [
-		  {
-			userAgent: "*",
-			allow: "/",
-			crawlDelay: 2
-		  },
-		]
-	  }
-	}
+      use: 'gridsome-plugin-robots',
+      options: {
+        host: 'https://modafinilici.com',
+        sitemap: 'https://modafinilici.com/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    },
 	{
       use: 'klaro-gridsome',
       options: {
