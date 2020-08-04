@@ -65,7 +65,7 @@ module.exports = {
       use: 'klaro-gridsome',
       options: {
         privacyPolicy: '/confidentialitate/',
-        cookieName: 'acord',
+        cookieName: 'consent',
         translations: {
           en: {
             consentModal: {
@@ -104,4 +104,3 @@ module.exports = {
     types.forEach(type => addStyleResource(config.module.rule('scss').oneOf(type)))
   }
 }
-

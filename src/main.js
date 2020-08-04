@@ -13,7 +13,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('Layout', DefaultLayout)
 
   // Add attributes to HTML tag
-  head.htmlAttrs = { lang: 'en' }
+  head.htmlAttrs = { lang: 'ro' }
 
   head.link.push({
     rel: 'manifest',
