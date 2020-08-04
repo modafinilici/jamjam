@@ -1,17 +1,17 @@
-<template>
+  <template>
   <g-link to="/" class="logo" title="Back to home">
     <transition name="theme">
       <div v-if="color == 'dark'">
-        <g-image src="~/assets/img/logo-bright.svg" alt="logo" />
+     <!--   <g-image src="~/assets/img/logo-bright.svg" alt="logo" /> -->
       </div>
     </transition>
     <transition name="theme">
       <div v-if="color == 'bright'">
-        <g-image src="~/assets/img/logo-dark.svg" alt="logo" />
+       <!-- <g-image src="~/assets/img/logo-dark.svg" alt="logo" /> -->
       </div>
     </transition>
   </g-link>
-</template>
+</template> 
 
 <script>
 export default {
@@ -52,6 +52,6 @@ export default {
 .theme-enter, .theme-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-</style>
+</style> 
 
 

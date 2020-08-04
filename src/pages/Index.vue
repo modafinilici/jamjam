@@ -1,12 +1,12 @@
 <template>
   <Layout :sidebar="true">
     <div class="content">
-      <h1>{{ $static.metadata.siteName }} - {{ this.description }}</h1>
+      <h1>{{ this.description }}</h1>
       <nav>
         <!-- To use other icons here, you need to import them in the Shortcut component -->
-        <Shortcut link="/getting-started" text="Introduction" icon="play-icon" />
-        <Shortcut link="/theme-configuration" text="Configuration" icon="sliders-icon" />
-        <Shortcut link="/theme-configuration#changing-colors" text="Change colors" icon="eye-icon" />
+        <Shortcut link="/ce-este-modafinilul" text="Introducere" icon="play-icon" />
+        <Shortcut link="/modafinil-romania" text="In Romania" icon="sliders-icon" />
+        <Shortcut link="/modafinil-pret" text="Pret" icon="eye-icon" />
       </nav>
      <!-- <GitLink class="git" size="large" /> -->
     </div>
@@ -32,14 +32,14 @@ export default {
   },
   data() {
     return {
-      description: 'The ultimate static generated documentation theme for the JAM-stack'
+      description: 'Modafinil - Cum, cand si cine il poate folosi in siguranta'
     }
   },
   metaInfo() {
     return {
       title: this.description,
       meta: [
-        { key: 'description', name: 'description', content: 'A theme for static site documentation based on Gridsome, ready to deploy to Netlify in one click.' }
+        { key: 'description', name: 'description', content: 'Scopul acestui blog este de a încuraja informarea asupra efectelor acestei substante.' }
       ]
     }
   }
