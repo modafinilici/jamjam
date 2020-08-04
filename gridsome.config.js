@@ -16,8 +16,8 @@ function addStyleResource (rule) {
 }
 
 module.exports = {
-  siteName: 'Jamdocs',
-  siteUrl: process.env.SITE_URL || 'https://modafinilici.com/',
+  siteName: 'Modafinilici',
+  siteUrl: process.env.SITE_URL || 'https://modafinilici.com',
   plugins: ['gridsome-plugin-robots'],
   templates: {
     Doc: '/:slug',
@@ -53,6 +53,20 @@ module.exports = {
         },
       },
     },
+	{
+	  use: 'gridsome-plugin-robots-txt',
+	  options: {
+		host: 'https://modafinilici.com',
+		sitemap: 'https://modafinilici.com/sitemap.xml',
+		policy: [
+		  {
+			userAgent: "*",
+			allow: "/",
+			crawlDelay: 2
+		  },
+		]
+	  }
+	}
 	{
       use: 'klaro-gridsome',
       options: {
