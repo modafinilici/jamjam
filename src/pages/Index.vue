@@ -8,7 +8,7 @@
         <Shortcut link="/theme-configuration" text="Configuration" icon="sliders-icon" />
         <Shortcut link="/theme-configuration#changing-colors" text="Change colors" icon="eye-icon" />
       </nav>
-      <GitLink class="git" size="large" />
+     <!-- <GitLink class="git" size="large" /> -->
     </div>
   </Layout>
 </template>
