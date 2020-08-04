@@ -1,24 +1,24 @@
 {
   "sidebar": [
     {
-      "section": "Introduction",
+      "section": "Introducere",
       "topics": [
         {
-          "title": "Getting started",
-          "slug": "getting-started"
+          "title": "Ce este modafinilul?",
+          "slug": "ce-este-modafinilul"
         }
       ]
     },
     {
-      "section": "Setup",
+      "section": "Modafinil Romania",
       "topics": [
         {
-          "title": "Theme configuration",
-          "slug": "theme-configuration"
+          "title": "Modafinilul in Romania",
+          "slug": "modafinil-romania"
         },
         {
-          "title": "Forestry CMS",
-          "slug": "forestry-cms"
+          "title": "Modafinil pret",
+          "slug": "modafinil-pret"
         }
       ]
     }

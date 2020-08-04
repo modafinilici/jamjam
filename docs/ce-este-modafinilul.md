@@ -1,7 +1,7 @@
 ---
-title: Forestry CMS
-date: 2020-01-02
-slug: forestry-cms
+title: Ce este modafinilul?
+date: 2020-08-03
+slug: ce-este-modafinilul
 
 ---
 ## Import starter

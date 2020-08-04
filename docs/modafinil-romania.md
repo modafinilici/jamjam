@@ -1,7 +1,7 @@
 ---
-title: Getting started
-date: 2018-09-15 07:42:34
-slug: getting-started
+title: Modafinilul in Romania
+date: 2020-08-04 07:42:34
+slug: modafinil-romania
 ---
 
 ## What is Jamdocs

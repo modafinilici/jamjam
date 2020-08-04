@@ -1,7 +1,7 @@
 ---
-title: Theme configuration 
-date: 2018-09-15 07:42:34
-slug: theme-configuration
+title: Modafinil pret
+date: 2020-08-04
+slug: modafinil-pret
 ---
 
 ## Changing logo
