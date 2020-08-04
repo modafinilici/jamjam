@@ -1,120 +1,207 @@
 <template>
-  <div class="mt-8 sm:pl-4 md:pl-6 md:pt-12 lg:pl-8 sm:pb-16 sm:border-l border-ui-border md:mt-0">
-    <h3 class="pt-0 mt-0 text-sm tracking-wide uppercase border-none">On this page</h3>
-    <div>
-      <ul>
-        <li
-          v-for="(heading, index) in headings"
-          :key="`${page.path}${heading.anchor}`"
-          :class="{
-            'border-t border-dashed border-ui-border pt-2 mt-2': index > 0 && heading.depth === 2,
-            'font-semibold': heading.depth === 2,
-            [`depth-${heading.depth}`]: true,
-          }"
-        >
-          <g-link
-            :to="`${page.path}${heading.anchor}`"
-            class="relative flex items-center py-1 text-sm transition transform hover:translate-x-1"
-            :class="{
-              'pl-2': heading.depth === 3,
-              'pl-3': heading.depth === 4,
-              'pl-4': heading.depth === 5,
-              'pl-5': heading.depth === 6,
-              'font-bold text-ui-primary': activeAnchor === heading.anchor
-            }"
-          >
-            <span
-              class="absolute w-2 h-2 -ml-3 rounded-full opacity-0 bg-ui-primary transition transform scale-0 origin-center"
-              :class="{
-                'opacity-100 scale-100': activeAnchor === heading.anchor
-              }"
-            ></span>
-            {{ heading.value }}
-          </g-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+    <aside class="onthispage" :class="{'onthispage--open' : this.$store.state.sidebarOpen}">
+              <ul v-if="checkAnchors(node.slug, item.slug)" v-for="{ node } in $static.docs.edges" :key="node.id">
+              <li v-for="heading in node.headings" :key="heading.value">
+              <a class="sub-topic" :href="'/' + item.slug + heading.anchor">{{heading.value}}</a> 
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- <GitLink class="git" /> -->
+      </nav>
+    </aside>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeAnchor: '',
-      observer: null
-    }
-  },
-
-  computed: {
-    page() {
-      return this.$page.markdownPage;
-    },
-    headings() {
-      return this.page.headings.filter(h => h.depth > 1);
-    }
-  },
-
-  watch: {
-    $route: function() {
-      if (process.isClient && window.location.hash) {
-        this.activeAnchor = window.location.hash;
-      }
-
-      // Clear the current observer.
-      this.observer.disconnect();
-
-      // And create another one for the next page.
-      this.$nextTick(this.initObserver);
-    }
-  },
-
-  methods: {
-    observerCallback(entries, observer) {
-      // This early return fixes the jumping
-      // of the bubble active state when we click on a link.
-      // There should be only one intersecting element anyways.
-      if (entries.length > 1) {
-        return;
-      }
-
-      const id = entries[0].target.id;
-
-      // We want to give the link of the intersecting
-      // headline active and add the hash to the url.
-      if (id) {
-        this.activeAnchor = '#' + id;
-
-        if (history.replaceState) {
-          history.replaceState(null, null, '#' + id);
+<static-query>
+query Menu {
+  menu: allMenu(order:ASC) {
+    edges {
+      node {
+        section
+        topics {
+          title
+          slug
         }
       }
-    },
-
-    initObserver() {
-      this.observer = new IntersectionObserver(this.observerCallback, {
-        // This rootMargin should allow intersections at the top of the page.
-        rootMargin: '0px 0px 99999px',
-        threshold: 1
-      });
-
-      const elements = document.querySelectorAll(
-        '.content h2, .content h3, .content h4, .content h5, .content h6'
-      );
-
-      for (let i = 0; i < elements.length; i++) {
-        this.observer.observe(elements[i]);
-      }
-    },
-  },
-
-  mounted() {
-    if (process.isClient) {
-      if (window.location.hash) {
-        this.activeAnchor = window.location.hash;
-      }
-      this.$nextTick(this.initObserver);
     }
   }
-};
+  docs: allDoc {
+    edges {
+      node {
+        slug
+        headings {
+          value
+          anchor
+        }
+      }
+    }
+  }
+}
+</static-query>
+
+<script>
+import GitLink from '~/components/GitLink.vue'
+import throttle from 'lodash/throttle'
+
+export default {
+  components: {
+    GitLink
+  },
+  watch: {
+    '$route' () {
+      this.$store.commit('closeSidebar')
+    }
+  },
+  methods: {
+    checkAnchors(slug, item) {
+      if (slug == item) {
+        return true
+      }
+    },
+    stateFromSize: function() {
+      if (window.getComputedStyle(document.body, ':before').content == '"small"') {
+        this.$store.commit('closeSidebar')
+      } else {
+        this.$store.commit('openSidebar')
+      }
+    },
+    sidebarScroll: function() {
+      let mainNavLinks = document.querySelectorAll('.topic.active + ul .sub-topic')
+      let fromTop = window.scrollY
+
+      mainNavLinks.forEach(link => {
+        let section = document.querySelector(link.hash)
+        let allCurrent = document.querySelectorAll('.current'), i
+
+        if (section.offsetTop <= fromTop) {
+          for (i = 0; i < allCurrent.length; ++i) {
+            allCurrent[i].classList.remove('current')
+          }
+          link.classList.add('current')
+        } else {
+          link.classList.remove('current')
+        }
+      })
+    }
+  },
+  beforeMount () {
+    this.stateFromSize()
+  },
+  mounted() {
+    window.addEventListener('scroll', throttle(this.sidebarScroll, 50))
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+.onthispage {
+  transition: background .15s ease-in-out, transform .15s ease-in-out, border-color .15s linear;
+  padding: 100px 30px 30px;
+  width: 300px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9;
+  will-change: transform;
+  transform: translateX(-300px);
+  border-right: 1px solid transparent;
+  overflow: auto;
+
+  @include respond-above(sm) {
+    transform: translateX(0);
+  }
+
+  &--open {
+    transform: translateX(0);
+  }
+  
+  .bright & {
+    background: $sidebarBright;
+    border-color: shade($sidebarBright, 10%);
+  }
+
+  .dark & {
+    background: $sidebarDark;
+    border-color: shade($sidebarDark, 40%);
+  }
+}
+
+nav {
+  position: relative;
+  min-height: 100%;
+  border: 1px solid transparent;
+  padding-bottom: 40px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    padding: 5px 0;
+    display: block;
+
+    &.active {
+      color: $brandPrimary;
+    }
+  }
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 20px;
+  opacity: .3;
+  letter-spacing: .15em;
+  font-weight: 700;
+}
+
+.topic {
+  font-weight: 700;
+}
+
+.sub-topic {
+  font-size: .875rem;
+  position: relative;
+  opacity: .8;
+  left: 15px;
+
+  &::after {
+    content: '';
+    transition: opacity .15s ease-in-out;
+    width: 6px;
+    height: 6px;
+    background: $brandPrimary;
+    border-radius: 100%;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 13px;
+    left: -15px;
+  }
+
+  &.current {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.git {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+</style>
+
+
