@@ -64,15 +64,15 @@ module.exports = {
 	{
       use: 'klaro-gridsome',
       options: {
-        privacyPolicy: '/privacy/',
-        cookieName: 'consent',
+        privacyPolicy: '/confidentialitate/',
+        cookieName: 'acord',
         translations: {
           en: {
             consentModal: {
-              description: 'Here you can see and customize the information that we collect about you.',
+              description: 'Aici puteți vedea și personaliza informațiile pe care le colectăm despre dvs.',
             },
             googleAnalytics: {
-              description: 'Website analytics powered by Google Analytics, allowing us to see how visitors use our website.'
+              description: 'Analiza site-urilor alimentată de Google Analytics, permițându-ne să vedem cum utilizatorii vizitează site-ul nostru web.'
             },
             purposes: {
               analytics: 'Analytics'

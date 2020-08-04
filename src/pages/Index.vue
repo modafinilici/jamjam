@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      description: 'Modafinil - Cum, cand si cine il poate folosi in siguranta'
+      description: 'Modafinil: Cum, cand si cine il poate folosi in siguranta'
     }
   },
   metaInfo() {
